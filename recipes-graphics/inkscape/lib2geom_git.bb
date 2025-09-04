@@ -9,11 +9,11 @@ inherit cmake pkgconfig
 DEPENDS = "boost double-conversion gtk+3 glib-2.0 cairo gsl"
 
 SRC_URI = " \
-    git://gitlab.com/inkscape/lib2geom.git;protocol=https;nobranch=1 \
+    git://gitlab.com/inkscape/lib2geom.git;protocol=https;branch=1.4.x \
 "
 
-PV = "1.2.2"
-SRCREV = "a84a73ebdae50cc729f57d1ffb788aeaef0f746c"
+PV = "1.4.0"
+SRCREV = "23316118755def8156c268f767894c145130e07d"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE = " \
