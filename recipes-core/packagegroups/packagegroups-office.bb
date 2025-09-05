@@ -4,23 +4,25 @@ and common runtime support libraries used by office/document-processing tools."
 LICENSE = "MIT"
 PR = "r1"
 
-inherit packagegroup allarch
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
+
+inherit packagegroup
 
 ALLOW_EMPTY:${PN} = "1"
 
 PACKAGES = " \
     ${PN} \
-    ${PN}-filter \
+    ${PN}-filters \
     ${PN}-document processing \
 "
 
 RRECOMMENDS:${PN} = "\
-    ${PN}-filter \
+    ${PN}-filters \
 "
 
-SUMMARY:${PN}-filter = "Import/export filters for many office and legacy formats"
+SUMMARY:${PN}-filters = "Import/export filters for many office and legacy formats"
 DESCRIPTION:${PN}-filters = "Libraries that add support for reading/writing formats such as AbiWord, Corel, ePub, iWork, FreeHand, GLTF assets, MS Publisher, MacWrite, ODF generators, PageMaker, Visio, WordPerfect, WPG and WPS."
-RRECOMMENDS:${PN}-filter = " \
+RRECOMMENDS:${PN}-filters = " \
     libabw \
     libcdr \
     libe-book \
@@ -38,7 +40,7 @@ RRECOMMENDS:${PN}-filter = " \
 "    
     
 SUMMARY:${PN}-document-processing = "Common runtime support libraries for document processing"
-DESCRIPTION:${PN}-support = "Helper libs used by the office stack: search/indexing, number conversion, shaping, math view, hyphenation, language tagging, text categorization, RDF, optimization, vectorization, etc."
+DESCRIPTION:${PN}-document-processing = "Helper libs used by the office stack: search/indexing, number conversion, shaping, math view, hyphenation, language tagging, text categorization, RDF, optimization, vectorization, etc."
 RRECOMMENDS:${PN}-document-processing = " \
     clucene-core \
     double-conversion \
@@ -46,10 +48,10 @@ RRECOMMENDS:${PN}-document-processing = " \
     gtkmathview \
     hyphen \
     libcmis \
-    libexttextcat
+    libexttextcat \
     liblangtag \
     librevenge \
-    lpsolve
+    lpsolve \
     libmdds \
     mythes \
     potrace \
@@ -59,5 +61,3 @@ RRECOMMENDS:${PN}-document-processing = " \
     xlnt \
     ebook-tools \
 "
-
-

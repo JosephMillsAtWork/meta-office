@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = " \
-    git://git.libreoffice.org/libgltf;branch=main;protocol=https \
+    https://dev-www.libreoffice.org/src/libgltf/libgltf-0.1.0.tar.gz \
 "
-SRCREV = "ef07151346918b04a2c029af3d0c674cb301fc6b"
+SRC_URI[sha256sum] = "119e730fbf002dd0eaafa4930167267d7d910aa17f29979ca9ca8b66625fd2da"
 inherit autotools pkgconfig features_check
 
 REQUIRED_DISTRO_FEATURES = "opengl"

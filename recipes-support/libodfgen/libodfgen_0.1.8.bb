@@ -6,9 +6,11 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "https://sourceforge.net/projects/libwpd/files/libodfgen/libodfgen-0.1.8/libodfgen-0.1.8.tar.xz"
-SRC_URI[md5sum] = "08c95c4b18c490a60394cc92fe9cb303"
-SRC_URI[sha256sum] = "323e491f956c8ca2abb12c998e350670930a32317bf9662b0615dd4b3922b831"
+SRC_URI[sha256sum] = "55200027fd46623b9bdddd38d275e7452d1b0ff8aeddcad6f9ae6dc25f610625"
 
 inherit autotools pkgconfig perlnative
 
-DEPENDS = "librevenge"
+DEPENDS = " \
+    librevenge \
+    libxml2 \
+"
