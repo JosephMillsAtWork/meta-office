@@ -1,5 +1,6 @@
 SUMMARY = "C++ client library for the CMIS interface"
 HOMEPAGE = "https://github.com/tdf/libcmis"
+SECTION = "libs"
 LICENSE = "MPL-1.1 & GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=0117647fecb9a932c25a7bbfc0333c37 \
@@ -7,18 +8,23 @@ LIC_FILES_CHKSUM = " \
     file://COPYING.GPL;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
 "
 
+SRCREV = "bda92cc01837ef933d7b6d5f94dceba6f47ec7e1"
 SRC_URI = " \
-    https://github.com/tdf/libcmis.git;protocol=https;branch=master \
+    git://github.com/tdf/libcmis.git;protocol=https;branch=master \
     file://0001-Avoid-cross-compile-unsafe-paths.patch \
 "
-SRC_URI[sha256sum] = "bda92cc01837ef933d7b6d5f94dceba6f47ec7e1"
+PV="0.6.2"
+S="${WORKDIR}/git"
 
 inherit autotools pkgconfig
 
-DEPENDS = "curl libxml2 cppunit boost"
+DEPENDS += " \
+    curl \
+    libxml2 \
+    cppunit \
+    boost \
+"
 
-
-## FIXME update the PACKAGECONFIG
 EXTRA_OECONF = " \
     --without-man \
 "

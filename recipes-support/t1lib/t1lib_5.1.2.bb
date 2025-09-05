@@ -29,3 +29,8 @@ EXTRA_OEMAKE = "without_doc"
 
 FILES:${PN} += " ${datadir}/t1lib/t1lib.config"
 FILES:${PN}-doc = "${datadir}/t1lib/doc/t1lib_doc.pdf"
+
+
+# needs libt1.la so no jobs
+PARALLEL_MAKE = ""
+PARALLEL_MAKEINST = ""

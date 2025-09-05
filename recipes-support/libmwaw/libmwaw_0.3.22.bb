@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = " \
 "
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}/${BPN}-${PV}/${BPN}-${PV}.tar.bz2"
-SRC_URI[sha256sum] = "a227a454b894804683e6ce9c0880ffcdafc7fe9f4b54db2d056a5cc3dfc23634"
+SRC_URI[sha256sum] = "fea4773ff24344814c7501a4b5fc3beecd94d25c180f812330e0974cab941235"
 
 inherit autotools-brokensep pkgconfig
 
-DEPENDS = "librevenge"
+DEPENDS += " librevenge"

@@ -3,7 +3,7 @@ HOMEPAGE = "http://sourceforge.net/projects/silgraphite"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b0452d508cc4eb104de0226a5b0c8786"
 
-inherit cmake
+inherit office_cmake
 
 DEPENDS += "freetype"
 

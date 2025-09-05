@@ -1,11 +1,12 @@
 SUMMARY = "Library providing the RDF API and triple stores"
 LICENSE = "GPL-2.0-only | LGPL-2.0-only"
+SECTION = "lib"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
     file://COPYING.LIB;md5=2d5025d4aa3495befef8f17206a5b0a1 \
 "
 
-DEPENDS = "rasqal mariadb libtool"
+DEPENDS = " rasqal mariadb libtool"
 
 SRC_URI = " \
     http://download.librdf.org/source/${BPN}-${PV}.tar.gz \

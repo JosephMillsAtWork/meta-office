@@ -5,17 +5,32 @@ LIC_FILES_CHKSUM = " \
     file://COPYING;md5=e6a600fd5e1d9cbde2d983680233ad02 \
 "
 
-DEPENDS = "libxml2"
+DEPENDS = " \
+    libxml2 \
+    autoconf-archive-native \
+"
 
 SRC_URI = " \
     https://bitbucket.org/tagoh/${BPN}/downloads/${BPN}-${PV}.tar.bz2 \
-    file://0001-configure.ac-add-missing-HAVE_INTROSPECTION-check.patch \
-    file://0002-configure.ac-remove-untranslated-AX_CHECK_ENABLE_DEB.patch \
 "
-SRC_URI[sha256sum] = "1f12a20a02ec3a8d22e54dedb8b683a43c9c160bda1ba337bf1060607ae733bd"
 
+SRC_URI[sha256sum] = "5ed6bcd4ae3f3c05c912e62f216cd1a44123846147f729a49fb5668da51e030e"
 inherit autotools pkgconfig gobject-introspection
+AUTOTOOLS_AUTORECONF = "yes"
+
+PACKAGECONFIG ?= " gtk-doc"
+PACKAGECONFIG[gtk-doc] = "\
+    --enable-gtk-doc,--disable-gtk-doc,\
+    gtk-doc-native libxslt-native docbook-xsl-stylesheets-native python3-pygments-native\
+"
 
 export GIR_EXTRA_LIBS_PATH="${B}/liblangtag/.libs"
+
+EXTRA_OECONF += " --disable-test --enable-gtk-doc"
+EXTRA_AUTORECONF += "-I m4macros -I m4"
+
+do_configure:prepend() {
+    rm -f ${S}/configure
+}
 
 BBCLASSEXTEND = "native"
