@@ -13,7 +13,8 @@ ALLOW_EMPTY:${PN} = "1"
 PACKAGES = " \
     ${PN} \
     ${PN}-filters \
-    ${PN}-document processing \
+    ${PN}-document-processing \
+    ${PN}-graphics \
 "
 
 RRECOMMENDS:${PN} = "\
@@ -61,3 +62,13 @@ RRECOMMENDS:${PN}-document-processing = " \
     xlnt \
     ebook-tools \
 "
+
+
+
+SUMMARY:${PN}-graphics = "Various graphics libraies and programs like inkscape"
+DESCRIPTION:${PN}-document-processing = "Small set of graphics packages for the office suite"
+RRECOMMENDS:${PN}-document-processing = " \
+    lib2geom \
+    colm \
+"
+

@@ -1,64 +1,55 @@
+# classes/office_cmake.bbclass
+# Always-on scrub of CMake/pkg-config/binconfig artifacts installed under ${D}.
+# Relies on cmake.bbclass for layout; we do not modify EXTRA_OECMAKE here.
+
 inherit cmake
 
-CMAKE_OFFICE_ENABLE            ?= "0"
-CMAKE_OFFICE_SCRUB_BINCONFIG   ?= "0"
-CMAKE_OFFICE_SCRUB_EXTRA_GLOBS ?= ""
-CMAKE_OFFICE_VERBOSE           ?= "1"
-
-EXTRA_OECMAKE:append = " \
-  -DCMAKE_INSTALL_PREFIX=${prefix} \
-  -DCMAKE_INSTALL_LIBDIR=${baselib} \
-  -DCMAKE_INSTALL_BINDIR=${bindir} \
-  -DCMAKE_INSTALL_INCLUDEDIR=${includedir} \
-"
-
-do_install:prepend:class-native(){ 
-    no_staging_check=true; 
+# Native/nativesdk: still scrub, but skip fatal staging check to avoid false positives.
+do_install:prepend:class-native() {
+    no_staging_check=true
 }
-
-do_install:prepend:class-nativesdk(){ 
-    no_staging_check=true; 
+do_install:prepend:class-nativesdk() {
+    no_staging_check=true
 }
 
 do_install:append() {
-    [ "${CMAKE_OFFICE_ENABLE}" = "1" ] || exit 0
-
-    # sanity: 
+    # Quick sanity: duplicated /usr//usr hints at a broken upstream install prefix.
     if ( cd ${D} 2>/dev/null && grep -qr 'usr//usr' ); then
-        bbfatal 'usr//usr found - check CMAKE_INSTALL_PREFIX!'
+        bbfatal 'usr//usr found - check upstream CMake install dirs!'
     fi
 
-    # scrub "posix-ish" friendly 
+    # Targets to scrub: CMake exports/configs, pkg-config .pc, and legacy *-config helpers.
     default_preds="-name '*.cmake' -o -name '*Targets*.cmake' -o -name '*Config*.cmake' -o -name '*.pc'"
-    extra_preds=""
-    for g in ${CMAKE_OFFICE_SCRUB_EXTRA_GLOBS}; do
-        extra_preds="$extra_preds -o -name '$g'"
-    done
 
-    # walk files 
-    find "${D}" -type f \( ${default_preds} ${extra_preds} \) -print0 2>/dev/null | \
+    # Rewrite absolute build/sysroot paths to relocatable forms and normalize _IMPORT_PREFIX.
+    find "${D}" -type f \( ${default_preds} \) -print0 2>/dev/null | \
     while IFS= read -r -d '' f; do
-        [ "${CMAKE_OFFICE_VERBOSE}" = "1" ] && bbnote "cmake-office: scrubbing $f"
-        # Map DESTDIR/sysroot+prefix -> ${_IMPORT_PREFIX}${prefix} when present,
-        # then drop any remaining build/sysroot paths.
+        # Normalize the line CMake writes with an absolute path:
+        #   set(_IMPORT_PREFIX "/abs/path/.../image/usr")
+        # or:
+        #   get_filename_component(_IMPORT_PREFIX "/abs/path/.../image/usr" PATH)
         sed -i \
+          -e 's#^set(_IMPORT_PREFIX ".*")#set(_IMPORT_PREFIX "")#' \
+          -e 's#^get_filename_component(_IMPORT_PREFIX ".*" PATH)#set(_IMPORT_PREFIX "")#' \
+          \
           -e "s#${D}${prefix}#\${_IMPORT_PREFIX}${prefix}#g" \
           -e "s#${RECIPE_SYSROOT}${prefix}#\${_IMPORT_PREFIX}${prefix}#g" \
           -e "s#${RECIPE_SYSROOT_NATIVE}${prefix}#\${_IMPORT_PREFIX}${prefix}#g" \
+          \
           -e "s#${D}##g" \
           -e "s#${TMPDIR}##g" \
           -e "s#${RECIPE_SYSROOT_NATIVE}##g" \
           -e "s#${RECIPE_SYSROOT}##g" \
           -e "s#${B}##g" \
           -e "s#${S}##g" \
+          -e "s#${WORKDIR}##g" \
           "$f" || true
     done
 
-    # legacy *-config helpers
-    if [ "${CMAKE_OFFICE_SCRUB_BINCONFIG}" = "1" ] && [ -d "${D}${bindir}" ]; then
+    # Legacy *-config helpers sometimes bake absolute paths; normalize them too.
+    if [ -d "${D}${bindir}" ]; then
         find "${D}${bindir}" -maxdepth 1 -type f -name '*-config' -print0 2>/dev/null | \
         while IFS= read -r -d '' c; do
-            [ "${CMAKE_OFFICE_VERBOSE}" = "1" ] && bbnote "cmake-office: binconfig scrub $c"
             sed -i \
               -e "s#${D}##g" \
               -e "s#${TMPDIR}##g" \
@@ -70,65 +61,47 @@ do_install:append() {
         done
     fi
 
-   
-    if [ "x" = "x$no_staging_check" ]; then
-        error=
-        if [ -d "${B}" ]; then
-            find "${B}" -type f \( -name '*.h' -o -name '*.hpp' -o -name '*.hh' -o -name '*.c' -o -name '*.cc' -o -name '*.cpp' \) -print0 2>/dev/null | \
-            while IFS= read -r -d '' s; do
-                if grep -q 'recipe-sysroot' "$s"; then
-                    bbwarn "$s contains links to build sysroot!"
-                    error=true
-                fi
-            done
-        fi
+    # Final guard: only fatal for target builds.
+    if [ "x$no_staging_check" = "xtrue" ]; then
+        return 0
+    fi
 
-        find "${D}" -type f -name '*.cmake' -print0 2>/dev/null | \
-        while IFS= read -r -d '' k; do
-            if grep -q 'recipe-sysroot' "$k"; then
-                bbwarn "$k contains links to build host sysroot!"
-                error=true
-            fi
-        done
-
-        if [ "x" != "x$error" ]; then
-            bbfatal "One or more files contain links to build host sysroot ${STAGING_DIR_HOST}(-native)"
+    error=
+    find "${D}" -type f -name '*.cmake' -print0 2>/dev/null | \
+    while IFS= read -r -d '' k; do
+        if grep -qE "${TMPDIR}|${RECIPE_SYSROOT}|${RECIPE_SYSROOT_NATIVE}" "$k"; then
+            bbwarn "$k contains build/sysroot paths"
+            error=true
         fi
+    done
+    if [ "x$error" != "x" ]; then
+        bbfatal "One or more installed files still reference build/sysroot paths."
     fi
 }
 
-
-# post 
-do_populate_sysroot[postfuncs] += "do_sysroot_cmake_sanity "
+# After sysroot population, re-check exported CMake files Yocto tracks (if present).
+do_populate_sysroot[postfuncs] += "do_sysroot_cmake_sanity"
 do_sysroot_cmake_sanity() {
-    [ "${CMAKE_OFFICE_ENABLE}" = "1" ] || return 0
-    error=
-    if [ -f "${CMAKEINSTALLED}" ]; then
+    # Only meaningful for target builds; native/nativesdk set no_staging_check.
+    if [ -f "${CMAKEINSTALLED}" ] && [ "x$no_staging_check" != "xtrue" ]; then
+        error=
         while IFS= read -r f; do
             [ -f "$f" ] || continue
             if grep -qE "${TMPDIR}|${RECIPE_SYSROOT}|${RECIPE_SYSROOT_NATIVE}" "$f"; then
                 bbwarn "$f contains build/sysroot paths"
                 error=true
             fi
-            if grep -q ';${libdir}' "$f"; then
-                bbwarn "$f contains links to \${libdir}!"
+            if grep -q ';${libdir}\b' "$f" || grep -q '"${libdir}/lib' "$f"; then
+                bbwarn "$f contains literal \${libdir} references"
                 error=true
             fi
-            if grep -q '"${libdir}/lib' "$f"; then
-                bbwarn "$f contains links to \${libdir}!"
-                error=true
-            fi
-            if grep -q ';${includedir}' "$f"; then
-                bbwarn "$f contains links to \${includedir}!"
-                error=true
-            fi
-            if grep -q '"${includedir}' "$f"; then
-                bbwarn "$f contains links to \${includedir}!"
+            if grep -q ';${includedir}\b' "$f" || grep -q '"${includedir}' "$f"; then
+                bbwarn "$f contains literal \${includedir} references"
                 error=true
             fi
         done < "${CMAKEINSTALLED}"
-    fi
-    if [ "x" != "x$error" ]; then
-        bbfatal "One or more files in sysroot contain non-relocatable references (see warnings above)."
+        if [ "x$error" != "x" ]; then
+            bbfatal "Non-relocatable references remain in CMake exports."
+        fi
     fi
 }
