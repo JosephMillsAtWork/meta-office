@@ -1,6 +1,7 @@
 SUMMARY = "A C++ PDF manipulation library"
 HOMEPAGE = "https://github.com/podofo/podofo"
-SECTION = "libs"
+SECTION = "text"
+# FIXME
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=db979804f025cf55aabec7129cb671ed"
 

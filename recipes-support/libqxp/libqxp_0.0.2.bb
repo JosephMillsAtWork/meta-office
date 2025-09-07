@@ -1,6 +1,6 @@
 SUMMARY = "Library that parses file formats of QuarkXPress documents"
 HOMEPAGE = "https://wiki.documentfoundation.org/DLP/Libraries/libqxp"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=815ca599c9df247a0c7f619bab123dad"
 

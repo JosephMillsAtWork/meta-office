@@ -1,5 +1,6 @@
 SUMMARY = "A library for rendering glTF models"
 HOMEPAGE = "https://wiki.documentfoundation.org/Development/libgltf"
+SECTION="text"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=9741c346eef56131163e13b9db1241b3 \

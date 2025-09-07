@@ -1,7 +1,8 @@
 SUMMARY = "A C++ PDF manipulation library"
 HOMEPAGE = "https://github.com/podofo/podofo"
-SECTION = "libs"
-LICENSE = "GPLv2"
+
+SECTION = "text"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
 
 inherit office_cmake
@@ -20,7 +21,7 @@ DEPENDS = " \
     pkgconfig-native \
     lua \
 "
-#  cppunit
+#  cppunit-native
 
 SRC_URI = " \
     gitsm://github.com/podofo/podofo.git;branch=master;protocol=https \

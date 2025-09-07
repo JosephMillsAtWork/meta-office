@@ -1,5 +1,6 @@
 SUMMARY = "Scribus: Open source desktop publishing"
 HOMEPAGE = "https://www.scribus.net/"
+SECTION = "graphics"
 LICENSE = "GPL-2.0-or-later & LGPL-2.0-or-later & BSD-3-Clause & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=8624a5a8d9594ce303aa8ece9bc8af28"
 

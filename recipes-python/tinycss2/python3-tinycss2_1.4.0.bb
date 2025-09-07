@@ -1,4 +1,5 @@
 SUMMARY = "A tiny CSS parser"
+SECTION = "python"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1d072d7e30e34f33f8ae956ada04fa2c"
 

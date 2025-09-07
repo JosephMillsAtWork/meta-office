@@ -1,4 +1,5 @@
 SUMMARY = "Efficient binary-decimal and decimal-binary conversion routines"
+SECTION="libs"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ea35644f0ec0d9767897115667e901f"
 

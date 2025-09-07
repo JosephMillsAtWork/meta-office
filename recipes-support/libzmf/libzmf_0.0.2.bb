@@ -1,6 +1,6 @@
 SUMMARY = "Libzmf is a library that parses the file format of Zoner Callisto/Draw documents"
 HOMEPAGE = "https://wiki.documentfoundation.org/DLP/Libraries/libzmf"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = "file://COPYING;md5=815ca599c9df247a0c7f619bab123dad"
 SRC_URI = "http://dev-www.libreoffice.org/src/${BPN}/${BPN}-${PV}.tar.xz"

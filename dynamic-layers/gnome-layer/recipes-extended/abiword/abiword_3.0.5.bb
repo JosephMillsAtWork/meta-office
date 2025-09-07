@@ -7,9 +7,9 @@ DEPENDS  = " \
     perl-native \
     gtk+ \
     gtkmathview \
-    wv \
+    wvware-tools \
     fribidi \
-    jpeg \
+    libjpeg-turbo \
     libpng \
     librsvg \
     libwmf-native \

@@ -1,5 +1,6 @@
 SUMMARY = "A thesaurus library"
 HOMEPAGE = "http://hunspell.sourceforge.net/"
+SECTION="fonts"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=b128e548f03bd893acff0bbd9053aaef \

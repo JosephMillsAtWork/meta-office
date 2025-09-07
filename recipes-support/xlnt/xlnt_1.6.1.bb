@@ -1,5 +1,6 @@
 SUMMARY = "Font rendering capabilities for complex non-Roman writing systems"
 HOMEPAGE = "https://github.com/tfussell/xlnt"
+SECTION="text"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=4a1677d641addb7678c5500246411979"
 

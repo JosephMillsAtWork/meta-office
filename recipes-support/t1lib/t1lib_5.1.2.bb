@@ -1,5 +1,5 @@
 SUMMARY = "A Type1 Font Rastering Library"
-SECTION = "libs"
+SECTION = "text"
 DEPENDS = "virtual/libx11 libxaw"
 
 LICENSE = "LGPL-2.0-only & GPL-2.0-only"

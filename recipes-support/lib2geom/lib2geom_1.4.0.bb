@@ -1,6 +1,6 @@
 SUMMARY = "2Geom: easy 2D graphics library"
 HOMEPAGE = "https://gitlab.com/inkscape/lib2geom"
-
+SECTION = "libs"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://COPYING-LGPL-2.1;md5=fad9b3332be894bab9bc501572864b29"
 

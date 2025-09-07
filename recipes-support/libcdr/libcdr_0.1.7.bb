@@ -1,5 +1,6 @@
 SUMMARY = "CorelDraw file format importer library for LibreOffice"
 HOMEPAGE = "https://wiki.documentfoundation.org/DLP/Libraries/libcdr"
+SECTION="text"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=815ca599c9df247a0c7f619bab123dad \

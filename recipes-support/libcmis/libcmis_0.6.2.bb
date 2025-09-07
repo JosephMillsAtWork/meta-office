@@ -1,6 +1,6 @@
 SUMMARY = "C++ client library for the CMIS interface"
 HOMEPAGE = "https://github.com/tdf/libcmis"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "MPL-1.1 & GPL-2.0-only & LGPL-2.1-only"
 LIC_FILES_CHKSUM = " \
     file://COPYING.MPL;md5=0117647fecb9a932c25a7bbfc0333c37 \

@@ -1,5 +1,6 @@
 SUMMARY = "A text hyphenation library"
 HOMEPAGE = "http://hunspell.sourceforge.net/"
+SECTION="text"
 LICENSE = "LGPL-2.1-only | GPL-2.0-only | MPL-1.1"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=d45e3467790c1cae990cc9ca3293bc97 \

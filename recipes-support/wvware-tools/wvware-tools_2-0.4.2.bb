@@ -1,6 +1,6 @@
 SUMMARY = "Programs for accessing Microsoft Word documents"
 HOMEPAGE = "http://wvware.sourceforge.net/"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=3bf50002aefd002f49e7bb854063f7e7"
 

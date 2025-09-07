@@ -1,5 +1,6 @@
 SUMMARY = "A library for import of many old Mac document formats"
 HOMEPAGE = "http://sourceforge.net/projects/libmwaw"
+SECTION="text"
 LICENSE = " LGPL-2.1-only & MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING.LGPL;md5=a049c5e22d3bd7bc3c9a2e9135a6d104 \

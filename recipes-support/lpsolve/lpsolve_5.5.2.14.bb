@@ -1,5 +1,6 @@
 SUMMARY = "A Mixed Integer Linear Programming (MILP) solver"
 HOMEPAGE = "http://lpsolve.sourceforge.net/5.5/"
+SECTION="text"
 LICENSE = "LGPL-2.1-only"
 LIC_FILES_CHKSUM = "file://README.txt;start_line=6;end_line=7;md5=bc6cdbcd98faaddcdde660c085611e7c"
 

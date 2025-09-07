@@ -1,5 +1,6 @@
 SUMMARY = "A library for import of Macromedia/Adobe FreeHand documents"
 HOMEPAGE = "http://wiki.documentfoundation.org/DLP/Libraries/libfreehand"
+SECTION = "text"
 LICENSE = "MPL-2.0"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=815ca599c9df247a0c7f619bab123dad \

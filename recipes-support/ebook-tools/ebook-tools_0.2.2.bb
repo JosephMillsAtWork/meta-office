@@ -1,6 +1,6 @@
 SUMMARY = "Tools for accessing and converting various ebook file formats"
 HOMEPAGE = "https://sourceforge.net/projects/ebook-tools"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=a6c399c223550f0049f693bfbef379ee"
 

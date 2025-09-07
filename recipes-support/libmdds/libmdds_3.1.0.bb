@@ -1,6 +1,6 @@
 SUMMARY = "A collection of multi-dimensional data structures and indexing algorithms"
 HOMEPAGE = "https://gitlab.com/mdds/mdds"
-SECTION = "libs"
+SECTION = "text"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=60a6093677ded88b5e28677e52a0c011"
 
