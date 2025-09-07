@@ -14,7 +14,8 @@ DEPENDS = " \
     gsl \
     ragel-native \
 "
-
+# patch follow up. 
+# https://gitlab.com/inkscape/lib2geom/-/issues/84
 SRC_URI = " \
     git://gitlab.com/inkscape/lib2geom.git;branch=1.4.x;protocol=https \
     file://0001-cython3-to-look-for-as-well.patch \

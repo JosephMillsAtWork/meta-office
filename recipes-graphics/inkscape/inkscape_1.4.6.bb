@@ -42,6 +42,10 @@ DEPENDS:append = " \
     libsoup-2.4 \
     aspell \
 "
+RDEPENS:${PN} += " \
+    desktop-file-utils \
+    hicolor-icon-theme \
+"
 
 PACKAGECONFIG ?= " \
     shared \
@@ -76,6 +80,8 @@ PACKAGECONFIG[nls] = "-DWITH_NLS=ON, -DWITH_NLS=OFF, "
 PACKAGECONFIG[lcms] = "-DENABLE_LCMS=ON, -DENABLE_LCMS=OFF, lcms"
 PACKAGECONFIG[x11] = "-DWITH_X11=ON, -DWITH_X11=OFF, libx11"
 PACKAGECONFIG[manpages-compressed] = "-DWITH_MANPAGE_COMPRESSION=ON, -DWITH_MANPAGE_COMPRESSION=OFF, gzip-native"
+
+# Blocker needs a recipe.
 # option(WITH_GRAPHICS_MAGICK "Compile with support of GraphicsMagick for raster extensions and image import resolution" ON)
 
 PACKAGECONFIG[jemalloc] = "-DWITH_JEMALLOC=ON, -DWITH_JEMALLOC=OFF, jemalloc"
@@ -86,4 +92,9 @@ EXTRA_OECMAKE:append = " -DWITH_INTERNAL_2GEOM=OFF "
 # option(ENABLE_BINRELOC "Enable relocatable binaries" OFF)
 FILES:${PN} += " \
     ${datadir}/metainfo \
+    ${libdir}/inkscape/libinkscape_base.so.* \
+"
+
+FILES:${PN}-dev += " \
+    ${libdir}/inkscape/libinkscape_base.so \
 "
