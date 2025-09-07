@@ -63,12 +63,11 @@ RRECOMMENDS:${PN}-document-processing = " \
     ebook-tools \
 "
 
-
-
 SUMMARY:${PN}-graphics = "Various graphics libraies and programs like inkscape"
-DESCRIPTION:${PN}-document-processing = "Small set of graphics packages for the office suite"
-RRECOMMENDS:${PN}-document-processing = " \
+DESCRIPTION:${PN}-graphics = "Small set of graphics packages for the office suite"
+RRECOMMENDS:${PN}-graphics = " \
     lib2geom \
     colm \
+    inkscape \
 "
 
