@@ -8,6 +8,7 @@ SRC_URI = "\
     git://github.com/adrian-thurston/ragel.git;branch=master;protocol=https \
     file://0001-configure-check-for-cross-compile.patch \
 "
+
 SRCREV = "0559d8f0b3e4450b72e8ced99766c32dfc8c9291"
 
 PV = "7.0.4"
@@ -21,12 +22,24 @@ DEPENDS += " colm colm-native "
 DEPENDS:class-nativesdk += " nativesdk-colm"
 
 
-EXTRA_OECONF:remove = "--disable-static"
+# EXTRA_OECONF:remove = "--disable-static"
 EXTRA_OECONF:append = " \
     --disable-manual \
-    --enable-static \
-    --with-colm-tools=${STAGING_DIR_NATIVE}${prefix} \
-    --with-colm=${RECIPE_SYSROOT}${prefix} \
+"
+
+EXTRA_OECONF:append:class-native = " \
+    --with-colm=${RECIPE_SYSROOT_NATIVE}/usr \
+    --with-colm-tools=${RECIPE_SYSROOT_NATIVE}/usr \
+"
+
+EXTRA_OECONF:append:class-nativesdk = " \
+    --with-colm=${RECIPE_SYSROOT_NATIVE}/usr \
+    --with-colm-tools=${RECIPE_SYSROOT_NATIVE}/usr \
+"
+
+EXTRA_OECONF:append:class-target = " \
+    --with-colm=${RECIPE_SYSROOT}/usr \
+    --with-colm-tools=${RECIPE_SYSROOT_NATIVE}/usr \
 "
 
 CPPFLAGS:append = " \

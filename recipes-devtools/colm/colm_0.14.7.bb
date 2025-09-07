@@ -40,7 +40,7 @@ PACKAGECONFIG[rust] = "RUST_BIN=rustc, , rust cargo"
 
 CPPFLAGS:append = " -I${S}/src/include"
 
-#EXTRA_OECONF:remove = "--disable-static"
+EXTRA_OECONF:remove = "--disable-static"
 EXTRA_OECONF:append:class-target = " \
     --with-colm=${STAGING_DIR_NATIVE}/usr/ \
 "
