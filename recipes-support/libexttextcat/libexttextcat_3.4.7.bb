@@ -7,5 +7,5 @@ SRC_URI = "git://anongit.freedesktop.org/git/libreoffice/libexttextcat.git;branc
 SRCREV = "3b85d7e9fd34990f5be6a7e321c2e6b135064464"
 
 inherit autotools pkgconfig
-
+S="${WORKDIR}/git"
 FILES:${PN} += "${datadir}/vala"

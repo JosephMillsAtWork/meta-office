@@ -38,6 +38,8 @@ RRECOMMENDS:${PN}-filters = " \
     libwpd \
     libwpg \
     libwps \
+    libqxp \
+    libzmf \
 "    
     
 SUMMARY:${PN}-document-processing = "Common runtime support libraries for document processing"
@@ -61,6 +63,7 @@ RRECOMMENDS:${PN}-document-processing = " \
     wvware-tools \
     xlnt \
     ebook-tools \
+    podofo \
 "
 
 SUMMARY:${PN}-graphics = "Various graphics libraies and programs like inkscape"
@@ -69,5 +72,6 @@ RRECOMMENDS:${PN}-graphics = " \
     lib2geom \
     colm \
     inkscape \
+    scribus \
 "
 

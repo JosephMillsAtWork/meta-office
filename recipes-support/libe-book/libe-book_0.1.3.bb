@@ -14,4 +14,11 @@ SRC_URI[sha256sum] = "7e8d8ff34f27831aca3bc6f9cc532c2f90d2057c778963b884ff3d1e34
 
 inherit autotools pkgconfig
 
-DEPENDS = "icu libxml2 librevenge liblangtag boost-native gperf-native"
+DEPENDS = " \
+    icu \
+    libxml2 \
+    librevenge \
+    liblangtag \
+    boost-native \
+    gperf-native \
+"
